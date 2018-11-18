@@ -18,6 +18,9 @@
                     <th>Id</th>
                     <th>Nome</th>
                     <th>Quantidade</th>
+                    <th>Preco</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +30,9 @@
                         <td>@prod.Id</td>
                         <td>@prod.Nome</td>
                         <td>@prod.Quantidade</td>
-                        <td>prods</td>
+                        <td>@prod.Preco</td>
+                        <td>@prod.Descricao</td>
+                        @*<td>@prod.Categoria.Descricao</td>*@
                     </tr>
                 }
             </tbody>

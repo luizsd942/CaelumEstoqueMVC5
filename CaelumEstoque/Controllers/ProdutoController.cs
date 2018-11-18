@@ -25,6 +25,7 @@ namespace CaelumEstoque.Controllers
             CategoriasDAO dao = new CategoriasDAO();
             IList<CategoriaDoProduto> categorias = dao.Lista();
             ViewBag.Categorias = categorias;
+            ViewBag.Produto = new Produto();
             return View();
         }
 
@@ -44,9 +45,23 @@ namespace CaelumEstoque.Controllers
             //A variável produto recebida pelo método da classe controladora é instanciada e 
             //preenchida por um componente do ASP.NET MVC conhecido como Model Binder.
 
-            new ProdutosDAO().Adiciona(produto);
+            var idCategoria = 1;
+            if (produto.CategoriaId.Equals(idCategoria) && produto.Preco < 100)
+            {
+                ModelState.AddModelError("Produto.ValidaInformatica","Produto de Informática abaixo de R$100");
+            }
 
-            return RedirectToAction("Index", "Produto");
+            if (ModelState.IsValid) {
+                new ProdutosDAO().Adiciona(produto);
+                return RedirectToAction("Index", "Produto");
+            }
+            else
+            {
+                ViewBag.Produto = produto;
+                CategoriasDAO dao = new CategoriasDAO();
+                ViewBag.Categorias = dao.Lista();
+                return View("Form");
+            }
         }
     }
 }
