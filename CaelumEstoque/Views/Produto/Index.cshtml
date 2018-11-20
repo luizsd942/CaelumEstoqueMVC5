@@ -30,7 +30,7 @@
                     <tr>
                         <td>@prod.Id</td>
                         <td>
-                            @Html.ActionLink(@prod.Nome, "VisualizaProduto", new { id = prod.Id } )
+                            @Html.RouteLink(prod.Nome, "DetalhesProduto", new { id = prod.Id } )
                         </td>
                         <td>@prod.Quantidade</td>                        
                     </tr>

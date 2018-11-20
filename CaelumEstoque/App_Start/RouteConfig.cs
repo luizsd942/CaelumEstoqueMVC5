@@ -11,6 +11,7 @@ namespace CaelumEstoque
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.MapMvcAttributeRoutes(); //Ativa o roteamento padrão
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
