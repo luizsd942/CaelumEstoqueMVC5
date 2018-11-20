@@ -9,9 +9,11 @@ namespace CaelumEstoque.Models
     public class Produto
     {
         public int Id { get; set; }
+
         [Required, StringLength(20)]
         public String Nome { get; set; }
 
+        [Range(0,10000,ErrorMessage ="Valor do produto inválido. Informe valor entre 0 e 10.000.")]
         public float Preco { get; set; }
 
         public CategoriaDoProduto Categoria { get; set; }

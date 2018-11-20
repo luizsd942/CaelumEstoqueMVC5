@@ -13,21 +13,26 @@
 <body>
     <div> 
         <form action="/Produto/Adiciona" method="post">
-            @Html.ValidationMessage("produto.ValidaInformatica")
-
+            @Html.ValidationMessage("produto.ValidaInformatica")<br /><br />
+            @* Valores digitados são mantidos em caso de inválido através do atributo Value *@
             <label for="nome">Nome</label>
             <input id="nome" name="produto.nome" value="@ViewBag.Produto.Nome" />
             @Html.ValidationMessage("produto.nome")
-
+            
+            <br />
             <label for="preco">Preco</label>
             <input id="preco" name="produto.preco" value="@ViewBag.Produto.Preco" />
+            @Html.ValidationMessage("produto.preco")
 
+            <br />
             <label for="quantidade">Quantidade</label>
             <input id="quantidade" name="produto.quantidade" value="@ViewBag.Produto.Quantidade"/>
 
+            <br />
             <label for="descricao">Descrição</label>
             <input id="descricao" name="produto.descricao" value="@ViewBag.Produto.Descricao"/>
 
+            <br />
             <label for="categoria">Categoria</label>
             @*<input id="categoria" name="produto.categoria" />*@
             <select id="categoria" name="produto.CategoriaId">
@@ -36,6 +41,7 @@
                 }
             </select>
 
+            <br /><br />
             <input type="submit" value="Cadastrar"/>
         </form>
     </div>

@@ -16,15 +16,14 @@ namespace CaelumEstoque.Controllers
             ProdutosDAO dao = new ProdutosDAO();
             IList<Produto> produtos = dao.Lista();
             //ViewBag cria atributos dinamicamente
-            ViewBag.Produtos = produtos;
-            return View();
+            //ViewBag.Produtos = produtos;
+            //Passa a utilizar View Fortemente Tipada
+            return View(produtos);
         }
 
         public ActionResult Form()
         {
-            CategoriasDAO dao = new CategoriasDAO();
-            IList<CategoriaDoProduto> categorias = dao.Lista();
-            ViewBag.Categorias = categorias;
+            ViewBag.Categorias = new CategoriasDAO().Lista();
             ViewBag.Produto = new Produto();
             return View();
         }
@@ -57,11 +56,17 @@ namespace CaelumEstoque.Controllers
             }
             else
             {
-                ViewBag.Produto = produto;
-                CategoriasDAO dao = new CategoriasDAO();
-                ViewBag.Categorias = dao.Lista();
+                // produto inválido então guarda na ViewBag para manter os dados digitados
+                ViewBag.Produto = produto;                
+                ViewBag.Categorias = new CategoriasDAO().Lista();
                 return View("Form");
             }
+        }
+
+        public ActionResult VisualizaProduto(int id)
+        {
+            ViewBag.Produto = new ProdutosDAO().BuscaPorId(id);
+            return View();
         }
     }
 }
