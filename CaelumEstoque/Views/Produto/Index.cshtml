@@ -17,9 +17,27 @@
                     <td>
                         @Html.RouteLink(prod.Nome, "DetalhesProduto", new { id = prod.Id } )
                     </td>
-                    <td>@prod.Quantidade</td>                        
+                    <td id="quantidade@(prod.Id)">
+                        @prod.Quantidade
+                    </td>                        
+                    <td>
+                        <a href="#" onclick="Decrementa(@prod.Id)" >Decrementar</a>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 
+<script src="~/Scripts/jquery-1.10.2.js" type="text/javascript"></script>
+<script type="text/javascript">
+    //Utiliza Ajax para realizar requisições assincronas através do método post
+    function Decrementa(produtoId) {
+        var url = "@Url.Action("DecrementaQtd","Produto")";
+        var params = { id: produtoId };
+        $.post(url, params, atualiza);
+    }
+    //Retorno JSON da View DecrementaQtd
+    function atualiza(resposta) {
+        $("#quantidade" + resposta.Id).html(resposta.Quantidade);
+    }
+</script>
